@@ -1,0 +1,25 @@
+@mixin render-css-value($property, $value) {
+  #{$property}: $value;
+}
+
+@mixin render-dimension($screenScale, $isWidth) {
+  @if $isWidth == true {
+    width: $screenScale;
+  } @else {
+    height: $screenScale;
+  }
+}
+
+@mixin render-margin($mb, $ml, $mr, $mt) {
+  margin-bottom: $mb;
+  margin-left: $ml;
+  margin-right: $mr;
+  margin-top: $mt;
+}
+
+@mixin render-padding($pb, $pl, $pr, $pt) {
+  padding-bottom: $pb;
+  padding-left: $pl;
+  padding-right: $pr;
+  padding-top: $pt;
+}

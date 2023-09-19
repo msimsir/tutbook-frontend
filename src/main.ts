@@ -1,11 +1,17 @@
-import './assets/main.css'
+import './assets/style.scss';
 
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import App from './App.vue';
+import { createI18n } from 'vue-i18n';
+import router from './router';
+import { messages } from './locales';
 
-const app = createApp(App)
+const i18n = createI18n({
+  locale: 'en-US',
+  messages: messages
+});
 
-app.use(router)
+const app = createApp(App);
+app.use(i18n).use(router);
 
-app.mount('#app')
+app.mount('#app');
