@@ -134,7 +134,7 @@ export const renderFlexWrapClass = (wrap: FlexWrap) => {
 export const renderLayoutPositionClass = (layoutPosition: LayoutPosition) => {
   switch (layoutPosition) {
     case LayoutPosition.Absolute:
-      return `ps-ab`;
+      return `ps-abs`;
     case LayoutPosition.Fixed:
       return `ps-fix`;
     case LayoutPosition.Relative:

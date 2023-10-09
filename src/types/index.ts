@@ -107,13 +107,13 @@ export enum FontSize {
 }
 
 export enum FontWeight {
-  Light = 1,
-  Regular,
-  Medium,
-  SemiBold,
-  Bold,
-  ExtraBold,
-  Black
+  Light = '200',
+  Regular = '300',
+  Medium = '400',
+  SemiBold = '500',
+  Bold = '600',
+  ExtraBold = '700',
+  Black = '800'
 }
 
 export enum FontStyle {
@@ -137,6 +137,27 @@ export enum TextAlign {
   Justify,
   Initial,
   Inherit
+}
+
+export enum ParagraphType {
+  Overline = '10px',
+  Caption = '12px',
+  Normal = '16px',
+  SubTitle = '20px',
+  Title = '24px'
+}
+
+export enum HeaderType {
+  SubHeader = 1,
+  Header,
+  LargeHeader,
+  OverLargeHeader
+}
+
+export enum Variant {
+  Primary = 1,
+  Secondary,
+  Third
 }
 
 export interface INavItem {
@@ -171,4 +192,39 @@ export interface ITransitionStyle {
   transitionProperty?: string;
   transitionDuration?: string;
   transitionFunction?: string;
+}
+
+export interface IBackgroundImageStyle {
+  image: string;
+  position?: string;
+  repeat?: string;
+  size?: string;
+  attachment?: string;
+}
+
+export interface ITextStyles {
+  fontWeight?: FontWeight;
+  fontStyle?: FontStyle;
+  textTransfrom?: TextTransform;
+  textAlign?: TextAlign;
+  lineHeight?: number;
+  fontColor?: string;
+}
+
+export interface ISignInUser {
+  email: string;
+  password: string;
+}
+
+export interface ISignUpUser extends ISignInUser {
+  firstName: string;
+  lastName: string;
+}
+
+export interface ISignedInUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  token: string;
 }
