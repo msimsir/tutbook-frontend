@@ -16,6 +16,7 @@ import { renderAlignItemsClass } from '@/utils';
 import { computed } from 'vue';
 
 interface IGridRowProps extends IPaddingStyles, IMarginStyles, IDimensionStyles {
+  className?: string;
   rowType?: GridDivision;
   align?: Align;
   gap?: Size;
@@ -44,7 +45,7 @@ const classes = computed(() => ({
 }));
 </script>
 <template>
-  <div :class="[classes.align]" class="grid-row"></div>
+  <div :class="[props.className ?? props.className, classes.align]" class="grid-row"></div>
 </template>
 
 <style lang="scss" scoped>

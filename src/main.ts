@@ -7,7 +7,7 @@ import router from './router';
 import { messages } from './locales';
 
 const i18n = createI18n({
-  locale: 'en-US',
+  locale: 'en',
   messages: messages
 });
 

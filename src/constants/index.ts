@@ -1,4 +1,5 @@
 import type { INavItem } from '@/types';
+
 export const navElements: Array<INavItem> = [
   {
     name: 'Home',
@@ -13,3 +14,5 @@ export const navElements: Array<INavItem> = [
     route: '/register'
   }
 ];
+
+export const profileLocalStorage = 'profile';

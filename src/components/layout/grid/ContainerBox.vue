@@ -5,14 +5,15 @@ import usePadding from '@/composables/usePadding';
 import useSize from '@/composables/useSize';
 import {
   Display,
-  type Align,
-  type FlexDirection,
+  Align,
+  FlexDirection,
   type IDimensionStyles,
   type IMarginStyles,
   type IPaddingStyles,
-  type LayoutPosition,
-  type Size,
-  Justify
+  LayoutPosition,
+  Size,
+  Justify,
+  type IBackgroundImageStyle
 } from '@/types';
 import {
   renderAlignItemsClass,
@@ -24,12 +25,17 @@ import {
 import { computed } from 'vue';
 
 interface IContainerBoxProps extends IPaddingStyles, IMarginStyles, IDimensionStyles {
+  className?: string;
   display?: Display;
   flexDirection?: FlexDirection;
   layoutPosition?: LayoutPosition;
   align?: Align;
   justify?: Justify;
   gap?: Size;
+  backgroundColor?: string;
+  backgroundImage?: IBackgroundImageStyle;
+  isInitialWidth?: boolean;
+  isInitialHeight?: boolean;
 }
 
 const props = withDefaults(defineProps<IContainerBoxProps>(), {
@@ -42,7 +48,9 @@ const dimension = useDimensions(
   props.absoluteWidth,
   props.height,
   props.percentHeight,
-  props.absoluteHeight
+  props.absoluteHeight,
+  props.isInitialWidth,
+  props.isInitialHeight
 );
 const margin = useMargin(props.marginBottom, props.marginLeft, props.marginRight, props.marginTop);
 const padding = usePadding(
@@ -56,14 +64,21 @@ const flexGap = useSize(props.gap);
 const classes = computed(() => ({
   display: props.display ? renderDisplayClass(props.display) : `ct-block`,
   direction: props.flexDirection ? renderFlexDirectionClass(props.flexDirection) : `fl-row`,
-  align: props.align ? renderAlignItemsClass(props.align) : `fl-start`,
-  justify: props.justify ? renderJustifyContentClass(props.justify) : `fl-start`,
+  align: props.align ? renderAlignItemsClass(props.align) : `ai-flstart`,
+  justify: props.justify ? renderJustifyContentClass(props.justify) : `jc-flstart`,
   position: props.layoutPosition ? renderLayoutPositionClass(props.layoutPosition) : `ps-rel`
 }));
 </script>
 <template>
   <div
-    :class="[classes.display, classes.direction, classes.align, classes.justify, classes.position]"
+    :class="[
+      props.className ?? props.className,
+      classes.display,
+      classes.direction,
+      classes.align,
+      classes.justify,
+      classes.position
+    ]"
     class="ct-box"
   >
     <slot />
@@ -89,5 +104,11 @@ const classes = computed(() => ({
     v-bind('padding.pT')
   );
   @include mixins.render-css-value('gap', v-bind('flexGap'));
+  background-color: v-bind('backgroundColor');
+  background-image: url("v-bind('backgroundImage?.image')");
+  background-position: v-bind('backgroundImage?.position');
+  background-repeat: v-bind('backgroundImage?.repeat');
+  background-size: v-bind('backgroundImage?.size');
+  background-attachment: v-bind('backgroundImage?.attachment');
 }
 </style>

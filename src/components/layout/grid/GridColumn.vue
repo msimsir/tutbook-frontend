@@ -6,17 +6,18 @@ import usePadding from '@/composables/usePadding';
 import useSize from '@/composables/useSize';
 import {
   Justify,
-  type Align,
-  type GridDivision,
+  Align,
+   GridDivision,
   type IMarginStyles,
   type IPaddingStyles,
-  type Size,
+   Size,
   type IDimensionStyles
 } from '@/types';
 import { renderAlignItemsClass, renderJustifyContentClass } from '@/utils';
 import { computed } from 'vue';
 
 interface IGridRowProps extends IPaddingStyles, IMarginStyles, IDimensionStyles {
+  className?: string;
   columnType?: GridDivision;
   align?: Align;
   justify?: Justify;
@@ -47,7 +48,10 @@ const classes = computed(() => ({
 }));
 </script>
 <template>
-  <div :class="[classes.align, classes.justify]" class="grid-column"></div>
+  <div
+    :class="[props.className ?? props.className, classes.align, classes.justify]"
+    class="grid-column"
+  ></div>
 </template>
 
 <style lang="scss" scoped>

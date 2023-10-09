@@ -23,12 +23,15 @@ import {
 import { computed } from 'vue';
 
 interface IFlexColumnProp extends IPaddingStyles, IMarginStyles, IDimensionStyles {
+  className?: string;
   align?: Align;
   justify?: Justify;
   wrap?: FlexWrap;
   gap?: Size;
   layoutPosition?: LayoutPosition;
   transition?: ITransitionStyle;
+  isInitialWidth?: boolean;
+  isInitialHeight?: boolean;
 }
 
 const props = defineProps<IFlexColumnProp>();
@@ -39,7 +42,9 @@ const dimension = useDimensions(
   props.absoluteWidth,
   props.height,
   props.percentHeight,
-  props.absoluteHeight
+  props.absoluteHeight,
+  props.isInitialWidth,
+  props.isInitialHeight
 );
 const margin = useMargin(props.marginBottom, props.marginLeft, props.marginRight, props.marginTop);
 const padding = usePadding(
@@ -51,18 +56,23 @@ const padding = usePadding(
 const flexGap = useSize(props.gap);
 
 const classes = computed(() => ({
-  align: props.align ? renderAlignItemsClass(props.align) : `fl-start`,
-  justify: props.justify ? renderJustifyContentClass(props.justify) : `fl-start`,
+  align: props.align ? renderAlignItemsClass(props.align) : `ai-flstart`,
+  justify: props.justify ? renderJustifyContentClass(props.justify) : `jc-flstart`,
   position: props.layoutPosition ? renderLayoutPositionClass(props.layoutPosition) : `ps-rel`,
   wrap: props.wrap ? renderFlexWrapClass(props.wrap) : `fl-wrap`
 }));
 </script>
 <template>
   <div
-    :class="[classes.align, classes.justify, classes.position, classes.wrap]"
+    :class="[
+      props.className ?? props.className,
+      classes.align,
+      classes.justify,
+      classes.position,
+      classes.wrap
+    ]"
     class="flex-column"
   >
-    flexbox
     <slot />
   </div>
 </template>
